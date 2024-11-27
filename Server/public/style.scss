@@ -1,0 +1,251 @@
+    // цвета
+$accent: #D7B399;
+$dark: #212121;
+$light: #F9F6F1;
+$gray: #CBCFD4;
+$light-gray: #F4F4F4;
+$dark-gray: #8D8D8D;
+$important: #D84033;
+$trueGreen: #2bc06e;
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0 auto;
+    padding: 0 auto;
+}
+html, body{
+    height: 100%;
+}
+.bodyWrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.content{
+    flex: 1 0 auto;
+}
+
+.page{
+    width: 100%;
+    &-light{
+        background-color: $light;
+    }
+    &-dark{
+        background-color: $dark;
+    }
+}
+
+#fixed-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 0 10px 4px $gray;
+}
+
+.wrapper{
+    width: 1290px;
+    margin:0 auto;
+    background: inherit;
+}
+
+.header{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background: inherit;
+    z-index: 100;
+    width: 100%;
+    padding: 5px 0 5px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.panel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 40px;
+    background-color: $accent;
+    color: $dark;
+    border: 2px solid $important;
+    border-radius: 25px;
+    &-link{
+        text-decoration: none;
+    }
+}
+#panel-admin, #panel-manager{
+    display: none;
+    right: 0;
+    margin-right: 50px;
+    position: absolute;
+}
+
+.nav{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    padding-left: 0;
+    &-item{
+        margin-left: 52px;
+        margin-top: 10px;
+    }
+    &-link{
+        color: $dark;
+        text-decoration: none;
+        position:relative;
+    }
+    &-link:before{
+        position:absolute;
+        bottom: -10px;
+        content: " ";
+        border-bottom: 1px solid $dark;
+        left:50%;
+        width:0%;
+        transition: all 0.3s;
+     }
+    &-link:hover:before{
+        width:100%;
+        left:0%
+    }
+    &-link:active{
+        background: $light-gray;
+    }
+    &-img{
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        margin-left: 30px;
+        margin-top: -15px;
+    }
+}
+
+.logo-img{
+    width: 75px;
+    height: 75px;
+}
+.notice{
+    text-align: center;
+    color: #fff;
+    padding: 64px 0;
+    &-title{
+        font-size: 30px;
+        text-transform: uppercase;
+        font-weight: 400px;
+    }
+}
+
+.collection{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:25px;
+    padding-bottom: 0;
+    &-item{
+        display: flex;
+        justify-content: space-between;
+        flex: 0 0 50%;
+        margin-right: 25px;
+    }
+    &-title{
+        font-size: 24px;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+    &-description{
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    &-img{
+        float: right;
+        width: 200px;
+        height: 200px;
+        padding-bottom: 0;
+    }
+    &-inf{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &-sneakers{
+        display: flex;
+    }
+    &-clothes{
+        display: flex;
+    }
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: $accent;
+    margin-bottom: 25px;
+}
+.arrow{
+    width:70px;
+    height: 30px;
+    opacity: 0.9;
+}
+
+.title-h2{
+    text-align: center;
+    font-size: 36px;
+}
+
+.footer{
+    display:flex;
+    justify-content: space-between;
+    padding:30px 0 0;
+    flex: 0 0 auto;
+    &-logo{
+        flex: 0 0 40%;
+    }
+    &-nav{
+        flex: 0 0 60%;
+        display: flex;
+        justify-content: space-between;
+        color: #fff;
+    }
+    &-list{
+        list-style-type: none;
+        padding-left: 0;
+        &-title{
+            font-size: 12px;
+            font-weight: 700;
+        }
+        &-item{
+            margin-bottom: 10px;
+            &-icon{
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+            }
+        }
+        &-link{
+            color:$gray;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+        &-link:hover{
+            color: #fff;
+            text-shadow: 0px 0px 3px #fff;
+        }
+    }
+}
+
+@import '_info';
+@import '_authorization-style';
+@import '_catalog';
+@import '_basket';
+@import '_admin-manager';

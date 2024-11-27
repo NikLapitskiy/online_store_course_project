@@ -1,0 +1,44 @@
+<div id="myModal" class="modal">
+    <div class="modal-content">
+      <form action="" method="POST" id="createOrder" class="modal-form">
+      <span class="close">&times;</span>
+      <div class="modal-header">
+        <h2 class="modal-header-title">Оформление заказа</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-input-box">
+          <label for="fullName" class="modal-input-box-label">ФИО:</label>
+          <input type="text" name="fullName" id="fullName" class="modal-input-box-input" placeholder="Введите ваше ФИО..." required>
+        </div>
+        <div class="modal-input-box">
+          <label for="phone" class="modal-input-box-label">Номер мобильного телефона:</label>
+          <input type="phone" name="phone" id="phone" class="modal-input-box-input" placeholder="+375(xx) xxx xx xx"
+          pattern='\s{0,}\+{1,1}375\s{0,}\({0,1}(([2]{1}([5]{1}|[9]{1}))|([3]{1}[3]{1})|([4]{1}[4]{1}))\)\s{0,}[0-9]{3,3}\s{0,}[0-9]{4,4}'
+          required>
+        </div>
+        <div class="modal-input-box">
+          <label for="adress" class="modal-input-box-label">Адрес:</label>
+          <input type="text" name="adress" id="adress" class="modal-input-box-input" placeholder="Введите адрес вашего проживания..." required>
+        </div>
+        <div class="modal-input-box">
+          <label for="postIndex" class="modal-input-box-label">Почтовый индекс:</label>
+          <input type="text" name="postIndex" id="postIndex" class="modal-input-box-input" placeholder="Введите почтовый индекс..." pattern="[0-9]{6}" required>
+        </div>
+        <div class="modal-input-box">
+          <label class="modal-input-box-label">Выберите способ доставки:</label>
+          <span class="modal-input-box-span"><input type="radio" name="delivery" value="Белпочта">&nbsp;Белпочта (от 2 до 3 дней)</span>
+          <span class="modal-input-box-span"><input type="radio" name="delivery" value="Европочта">&nbsp;Европочта (от 2 до 3 дней)</span>
+          <span class="modal-input-box-span"><input type="radio" name="delivery" value="Курьер">&nbsp;Курьер (от 1 до 2 дней)</span>
+        </div>
+        <div class="modal-input-box">
+          <label for="comment" class="modal-input-box-label">Добавьте комментарий к заказу:</label>
+          <textarea name="comment" id="comment" rows="3" class="modal-input-box-input" placeholder="Ваш комментарий..."></textarea>
+        </div> 
+      </div>
+      <div class="modal-footer">
+        <input type="submit" id="createOrder-btn" value="Заказать">
+      </div>
+      </form>
+    </div>
+  </div>
+  <script src="/scripts/orderModal.js"></script>  

@@ -1,0 +1,95 @@
+.info{
+  &-conteiner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    // height: 600px;
+  }
+  &-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 600px;
+    border: 1px solid $light;
+    border-radius: 10px;
+    margin: 25px;
+    overflow: hidden;
+    &-info{
+      padding: 25px;
+      width: 90%;
+    }
+  }
+  &-img{
+    width: 600px;
+    height: 600px;
+  }
+  &-description{
+    font-size: 18px;
+    font-weight: 400;
+    width: 100%;
+    text-align: justify;
+    color: $light;
+  }
+}
+
+.review{
+  &-conteiner{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+  }
+  &-topTitle{
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    padding: 25px;
+  }
+  &-title{
+    width: 100%;
+    border-bottom: 1px solid $dark;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+  }
+  &-description{
+    width: 100%;
+    font-weight: 400;
+    text-align: justify;
+  }
+  &-box{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 1000px;
+    border: 1px solid $dark;
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+.contacts{
+  &-conteiner{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 750px;
+    padding: 10px;
+  }
+  &-title{
+    color: $light;
+  }
+  &-description{
+    color: $light;
+    text-align: center;
+  }
+}

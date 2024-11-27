@@ -1,0 +1,74 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/navbar.ejs') %>
+<div class="basket-wrapper" id="basket-wrapper">
+      <div class="basket-conteiner">
+        <div class="conteiner">
+          <h2>Работа с товаром</h2>
+          <div class="admin-btns">
+            <button type="button" class="admin-btn" id="viewProducts-btn">Просмотр товаров</button>
+            <button type="button" class="admin-btn" id="addProduct-btn">Добавление товара</button>
+            <button type="button" class="admin-btn" id="updateProduct-btn">Редактирование товара</button>
+            <button type="button" class="admin-btn" id="deleteProduct-btn">Удаление товара</button>
+          </div>
+        </div>
+        <div class="conteiner">
+          <h2>Работа с типами</h2>
+          <div class="admin-btns">
+            <button type="button" class="admin-btn" id="viewTypes-btn">Просмотр типов</button>
+            <button type="button" class="admin-btn" id="addType-btn">Добавление типа</button>
+            <button type="button" class="admin-btn" id="deleteType-btn">Удаление типа</button>
+          </div>
+        </div>
+        <div class="conteiner">
+          <h2>Работа с брендами</h2>
+          <div class="admin-btns">
+            <button type="button" class="admin-btn" id="viewBrands-btn">Просмотр брендов</button>
+            <button type="button" class="admin-btn" id="addBrand-btn">Добавление бренда</button>
+            <button type="button" class="admin-btn" id="deleteBrand-btn">Удаление бренда</button>
+          </div>
+        </div>
+        <div class="conteiner">
+          <h2>Работа с картинками</h2>
+          <div class="admin-btns">
+            <button type="button" class="admin-btn" id="viewImgs-btn">Просмотр картинок</button>
+            <button type="button" class="admin-btn" id="addImg-btn">Добавление картинки</button>
+            <button type="button" class="admin-btn" id="deleteImg-btn">Удаление картинки</button>
+          </div>
+        </div>
+        <div class="conteiner">
+          <h2>Работа с размерами</h2>
+          <div class="admin-btns">
+            <button type="button" class="admin-btn" id="viewSizes-btn">Просмотр размеров</button>
+            <button type="button" class="admin-btn" id="addSize-btn">Добавление размера</button>
+            <button type="button" class="admin-btn" id="deleteSize-btn">Удаление размера</button>
+          </div>
+        </div>
+        <div class="conteiner">
+          <h2>Работа с заказами</h2>
+          <div class="admin-btns">
+            <button type="button" class="admin-btn" id="viewOrders-btn">Просмотр заказов</button>
+            <button type="button" class="admin-btn" id="deleteOrder-btn">Удаление заказа</button>
+          </div>
+        </div>
+        <div class="conteiner">
+          <h2>Работа с отзывами</h2>
+          <div class="admin-btns">
+            <button type="button" class="admin-btn" id="viewReviews-btn">Просмотр отзывов</button>
+            <button type="button" class="admin-btn" id="deleteReview-btn">Удаление отзыва</button>
+          </div>
+        </div>
+        <div class="conteiner">
+          <h2>Работа с пользователями</h2>
+          <div class="admin-btns">
+            <button type="button" class="admin-btn" id="viewUsers-btn">Просмотр пользователей</button>
+            <button type="button" class="admin-btn" id="updateUser-btn">Редактировать пользователя</button>
+            <button type="button" class="admin-btn" id="deleteUser-btn">Удаление пользователя</button>
+          </div>
+        </div>
+        <div class="admin-conteiner">
+          <%- include('./partials/adminWork.ejs') %>
+        </div>
+      </div>
+    </div>
+<%- include('./partials/footer.ejs') %>
+<script src="/scripts/AdminWork.js"></script>

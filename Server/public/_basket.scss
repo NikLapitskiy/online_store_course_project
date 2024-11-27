@@ -1,0 +1,383 @@
+.basket{
+    &-wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: url(/resource/fon.jpg);
+        height: 100%;
+        width: 100%;
+    }
+    &-conteiner{
+        background: $light;
+        display: flex;
+        width: 1110px;
+        padding: 50px;
+        height: 100%;
+        flex-direction: column;
+    }
+    &-greetings{
+        color: $light;
+        font-size: 16px;
+        font-weight: 500;
+        background: $dark;
+        &-wrapper{
+            width: 1110px;
+            background: inherit;
+            padding: 10px 50px 10px 50px;
+        }
+    }
+    &-product{
+        &-wrapper{
+            display: flex;
+            width: 100%;
+            height: 250px;
+            margin:0 auto;
+            flex-direction: row;
+            justify-content: space-between;
+            border: 1px dashed $dark-gray;
+            border-radius: 25px;
+            margin-bottom: 25px;
+            overflow:hidden;
+        }
+        &-delete{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            border: 1px dashed $dark-gray;
+            border-bottom-left-radius: 25px;
+            border-top-right-radius: 25px;
+            border-top: none;
+            border-right: none;
+            margin: 0;
+            font-size: 40px;
+            text-align: center;
+            color: $dark;
+            cursor: pointer;
+            transition: 0.5s ease;
+            &-box{
+                display: flex;
+                justify-content: end;
+                position: absolute;
+                width: 1110px;
+            }
+        }
+        &-delete-button{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 5;
+        }
+        &-delete:hover{
+            background-color: $dark;
+            color: $light-gray;
+        }
+        &-conteiner{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-width: 250px;
+            height: 250px;
+            margin: 0 25px 0 0;
+            &-info{
+                justify-content: flex-start;
+                min-width: 860px;
+            }
+        }
+        &-title{
+            color: $dark;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        &-name{
+            color: $dark;
+            font-size:16px;
+            font-weight: 700; 
+        }
+        &-img{
+            width: 250px;
+            height: 250px;
+            border-radius: 25px;
+        }
+        &-description{
+            color: $dark;
+            width: 90%;
+            font-size:16px;
+            font-weight: 500; 
+            text-align: justify;
+        }
+        &-price, &-size{
+            color: $dark;
+            font-size:20px;
+            font-weight: 600;   
+        }
+        &-rating{
+            color: $dark-gray;
+            font-size:16px;
+            font-weight: 500;
+            margin: 0;
+            &-icon{
+                width: 16px;
+                height: 16px;
+            }
+        }
+        &-select-size{
+            width: 200px;
+            border: 1px #ddd solid;
+            background: #f8f8f8;
+            color: #000;
+            box-sizing: border-box;
+            cursor: pointer;
+            padding: 2px 30px 2px 10px;
+            border-radius: 5px;
+        }
+        &-to-basket-button{
+            height: 50px;
+            width: 200px;
+            border: 3px solid $dark;
+            border-radius: 25px;
+            background: $light-gray;
+            transition: 0.5s ;
+        }
+        &-to-basket-button:hover{
+            background: $light;
+            box-shadow: 0px 0px 2px 2px $trueGreen;
+            border: 3px solid $trueGreen;
+        }
+        &-slider{
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+            height: 250px;
+            &-item img{
+                object-fit: cover;
+                max-width: 250px;
+                max-height: 250px;
+                border-radius: 25px;
+            }
+            &-previous, &-next{
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                width: auto;
+                margin-top: -22px;
+                padding: 16px;
+                color: $dark;
+                font-weight: bold;
+                font-size: 16px;
+                transition: 0.6s ease;
+                border-radius: 0 3px 3px 0;
+            }
+            &-next{
+                right: 0;
+                border-radius: 3px 0 0 3px;
+            }
+            &-previous:hover, &-next:hover{
+                background-color: rgba(0, 0, 0, 0.2);
+            }
+            &-item{
+                animation-name: fade;
+                animation-duration: 1.5s;
+            }
+            @keyframes fade {
+                /* Устанавливаем и изменяем степень прозрачности: */
+                from {
+                    opacity: 0.4
+                }
+                to {
+                    opacity: 1
+                }
+            }
+        }
+    }
+    &-btns{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        &-btn{
+            width: 300px;
+            height: 45px;
+            background-color: $light;
+            border: 2px solid $trueGreen;
+            box-shadow: 0px 0px 5px 2px $trueGreen;
+            outline: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            color: $dark;
+            transition: 0.4s linear;
+        }
+        &-btn:hover{
+            background-color: $trueGreen;
+            box-shadow: 0px 0px 10px 5px $trueGreen;
+            color: #fff;
+        }
+    }
+}
+
+// #clearBasket:hover{
+//     background-color: red;
+//     border: 2px solid red;
+//     box-shadow: 0px 0px 10px 5px red;
+//     color: #fff;
+// }
+.modal {
+    top: 0;
+    right: 0;
+    display: none; 
+    position: fixed;
+    z-index: 101;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4);
+
+    &-content {
+        display: flex;
+        position: relative;
+        top: 5%;
+        margin: auto;
+        padding: 25px;
+        overflow: hidden;
+        border-radius: 5px;
+        height: 750px;
+        width: 500px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        background: $light;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+      }
+      
+      @keyframes animatetop {
+        from {top: -5%; opacity: 0}
+        to {top: 5%; opacity: 1}
+      }
+    /* Кнопка закрытия */
+    .close {
+        position: absolute;
+        color: #aaa;
+        right: 0;
+        top: 0;
+        font-size: 40px;
+        font-weight: bold;
+    }
+  
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    &-form{
+        width: 100%;
+    }
+    &-header{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100px;
+        border-radius: 5px;
+        background: $dark;
+        &-title{
+            color: $light-gray;
+        }
+    }
+    &-body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 550px;
+        background: $light;
+    }
+    &-footer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100px;
+        background: $dark;
+        border-radius: 5px;
+    }
+    &-input-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: flex-start;
+        width: 100%;
+        margin: 10px 0 10px 0; 
+        &-label{
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: $dark;
+        }
+        &-input{
+            background: inherit;
+            outline: none;
+            border:none;
+            font-size: 16px;
+            font-weight: 400;
+            color: $dark;
+            border-bottom: 1px solid $dark;
+        }
+        &-span{
+            font-size: 16px;
+            font-weight: 500;
+            margin: 5px 0 5px 0;
+            color: $dark;
+        }
+    }
+    &-input-box > textarea{
+        border: 1px solid $dark;
+        text-align: justify;
+    }
+    #createOrder-btn{
+        width: 200px;
+        height: 50px;
+        background-color: inherit;
+        color: #fff;
+        border: 2px solid $trueGreen;
+        border-radius: 25px;
+        box-shadow: 0 0 5px 2px $trueGreen;
+        font-size: 18px;
+        font-weight: 600;
+        transition: 0.3s ease;
+    }
+    #createOrder-btn:hover{
+        background-color: $trueGreen;
+        border: 2px solid $trueGreen;
+        border-radius: 25px;
+        box-shadow: 0 0 10px 5px $trueGreen;
+        color: #fff;
+    }
+}
+
+.orders{
+    width: 100%;
+    &-table{
+        width: 100%;
+        border: 1px solid $dark;
+        border-collapse: collapse;
+    }
+    &-table tr th, td{
+        border: 1px solid $dark;
+    }
+    &-table tr th{
+        text-align: center;
+    }
+    &-table tr td{
+        text-align: justify;
+    }
+}
+
+#createReview-form{
+    padding: 10px;
+    display: flex;
+}

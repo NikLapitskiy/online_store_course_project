@@ -1,0 +1,73 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/navbar.ejs') %>
+        <div class="page">
+            <div class="authorization">
+                <div class="authorization-wrapper">
+                    <div class="authorization-form-box login">
+                        <h2 class="authorization-title">Вход</h2>
+                        <form method="post" action="/user/login" id="login-form" autocomplete="off">
+                            <div class="authorization-input-box">
+                                <span class="authorization-input-box-icon"><ion-icon name="mail"></ion-icon></span>
+                                <input type="email" name="email" id="email" class="authorization-input-box-input" required>
+                                <label for="email" class="authorization-input-box-title">Email</label>
+                            </div>
+                            <div class="authorization-input-box">
+                                <span class="authorization-input-box-icon"><ion-icon name="lock-closed"></ion-icon></span>
+                                <input type="password" name="password" id="password" class="authorization-input-box-input" required>
+                                <label for="password" class="authorization-input-box-title">Пароль</label>
+                            </div>
+                            <div class="authorization-remember-forgot">
+                                <label for="checkbox"><input type="checkbox" id="checkbox"> Запомнить меня</label>
+                                <a href="#">Забыли пароль?</a>
+                            </div>
+                            <input type="submit" class="authorization-btn" id="submit" value="Войти"></input>
+                            <div class="authorization-login-register">
+                                <p>Еще не зарегистрированы?<a href="/user/registration" class="register-link">Регистрация</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <%- include('./partials/footer.ejs') %>
+
+        <!-- <script>
+            $("#login-form").submit(function(e){
+            e.preventDefault();
+              $.ajax({
+                  url:     $("#login-form").attr("action"),
+                  method:    "POST",
+                  dataType: "json",
+                  data: $("#login-form").serialize(),  // Сеарилизуем объект
+                  beforeSend: function(e){
+                    $.ajax({
+                        url: "/user/authorization",
+                        method: "GET",
+                        dataType: "json",
+                        success: function(res){
+                            let result = JSON.stringify(res);
+                            result = JSON.parse(result);
+                            alert(result.message);
+                        },
+                        error:function(res){
+                            let result = JSON.stringify(res);
+                            result = JSON.parse(result);
+                            alert(result.message);
+                        }
+                    })
+                  },
+                  success: function(res) { 
+                    let result = JSON.stringify(res);
+                    result = JSON.parse(result);
+                    alert(result.message);
+                    window.location.href = "/";
+                    },
+                    error: function(response) { // Данные не отправлены
+                    alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+                    }
+               });
+            })
+          </script> -->

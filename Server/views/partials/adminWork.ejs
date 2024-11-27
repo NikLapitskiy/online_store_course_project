@@ -1,0 +1,709 @@
+<!-- Работа с товарами -->
+
+<table class="table" id="viewProducts">
+    <tr>
+      <th>№ товара</th>
+      <th>Название</th>
+      <th>Цена</th>
+      <th>№ типа</th>
+      <th>№ бренда</th>
+      <th>Заголовок</th>
+      <th>Описание</th>
+    </tr>
+    <% if (products && products.length > 0) { %>
+        <% products.forEach(({ id, name, price, typeId, brandId, product_info}) => { %>
+          <tr>
+          <td><%= id %></td>
+          <td><%= name %></td>
+          <td><%= price %></td>
+          <td><%= typeId %></td>
+          <td><%= brandId %></td>
+          <% if(product_info) { %>
+          <td><%= product_info.title %></td>
+          <td><%= product_info.description %></td>
+          <% } else { %>
+            <td>Информации о товаре не найдено</td>
+          <% } %>
+          </tr>
+          <% })} else { %>
+            <td>Товаров не найдено!</td>
+          <% } %>
+  </table>
+  <form action="/admin/addProduct" method="POST" class="admin-form" id="form-addProduct">
+    <h3 class="admin-form-title">Добавление товара</h3>
+    <div class="admin-form-input-box">
+      <label for="productName" class="admin-form-input-box-label">Название товара:</label>
+      <input type="text" name="name" id="productName" class="admin-form-input-box-input" placeholder="Введите навзание товара..." required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productPrice" class="admin-form-input-box-label">Цена товара:</label>
+      <input type="text" name="price" id="productPrice" class="admin-form-input-box-input" placeholder="Введите цену товара..." required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productTypeId" class="admin-form-input-box-label">№ типа товара:</label>
+      <input type="number" name="typeId" id="productTypeId" class="admin-form-input-box-input" min="0" max="100" placeholder="Введите № типа товара..." required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productBrandId" class="admin-form-input-box-label">№ бренда товара:</label>
+      <input type="number" name="brandId" id="productBrandId" class="admin-form-input-box-input" min="0" max="100" placeholder="Введите № бренда товара..." required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productTitle" class="admin-form-input-box-label">Заголовок товара:</label>
+      <input type="text" name="title" id="productTitle" class="admin-form-input-box-input" placeholder="Введите заголовок товара..." required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productDescription" class="admin-form-input-box-label">Описание товара:</label>
+      <textarea name="description" id="productDescription" class="admin-form-input-box-input" rows="3" placeholder="Введите описание товара..." required></textarea>
+    </div>
+    <input type="submit" id="form-addProduct-btn" value="Добавить товар" class="admin-form-btn">
+  </form>
+
+  <form action="/admin/updateProduct" method="POST" class="admin-form" id="form-updateProduct">
+    <h3 class="admin-form-title">Редактирование товара</h3>
+    <div class="admin-form-input-box">
+      <label for="productId" class="admin-form-input-box-label">№ товара:</label>
+      <input type="number" name="id" id="productId" class="admin-form-input-box-input" placeholder="Введите № товара..." min="0" max="10000" required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productName" class="admin-form-input-box-label">Название товара:</label>
+      <input type="text" name="name" id="productName" class="admin-form-input-box-input" placeholder="Введите навзание товара..." required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productPrice" class="admin-form-input-box-label">Цена товара:</label>
+      <input type="text" name="price" id="productPrice" class="admin-form-input-box-input" placeholder="Введите цену товара..." required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productTypeId" class="admin-form-input-box-label">№ типа товара:</label>
+      <input type="number" name="typeId" id="productTypeId" class="admin-form-input-box-input" min="0" max="100" placeholder="Введите № типа товара..." required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productBrandId" class="admin-form-input-box-label">№ бренда товара:</label>
+      <input type="number" name="brandId" id="productBrandId" class="admin-form-input-box-input" min="0" max="100" placeholder="Введите № бренда товара..." required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productTitle" class="admin-form-input-box-label">Заголовок товара:</label>
+      <input type="text" name="title" id="productTitle" class="admin-form-input-box-input" placeholder="Введите заголовок товара..." required>
+    </div>
+    <div class="admin-form-input-box">
+      <label for="productDescription" class="admin-form-input-box-label">Описание товара:</label>
+      <textarea name="description" id="productDescription" class="admin-form-input-box-input" rows="3" placeholder="Введите описание товара..." required></textarea>
+    </div>
+    <input type="submit" id="form-updateProduct-btn" value="Редактировать товар" class="admin-form-btn">
+  </form>
+
+  <form action="/admin/deleteProduct" method="POST" class="admin-form" id="form-deleteProduct">
+    <h3 class="admin-form-title">Редактирование товара</h3>
+    <div class="admin-form-input-box">
+      <label for="productId" class="admin-form-input-box-label">№ товара:</label>
+      <input type="number" name="id" id="productId" class="admin-form-input-box-input" placeholder="Введите № товара..." min="0" max="10000" required>
+    </div>
+    <input type="submit" id="form-deleteProduct-btn" value="Удалить товар" class="admin-form-btn">
+  </form>
+
+  <!-- работа с типами -->
+
+  <table class="table" id="viewTypes">
+    <tr>
+      <th>№ типа</th>
+      <th>Название типа</th>
+    </tr>
+    <% if (types && types.length > 0) { %>
+      <% types.forEach(({id, name}) => { %>
+        <tr>
+        <td><%= id %></td>
+        <td><%= name %></td>
+        </tr>
+        <% })} else { %>
+          <td>Типов не найдено!</td>
+        <% } %>
+  </table>
+
+  <form action="/admin/addType" method="POST" class="admin-form" id="form-addType">
+    <h3 class="admin-form-title">Добавление типа</h3>
+    <div class="admin-form-input-box">
+      <label for="typeName" class="admin-form-input-box-label">Название типа:</label>
+      <input type="text" name="name" id="typeName" class="admin-form-input-box-input" placeholder="Введите навзание типа..." required>
+    </div>
+    <input type="submit" id="form-addType-btn" value="Добавить тип" class="admin-form-btn">
+  </form>
+
+  <form action="/admin/deleteType" method="POST" class="admin-form" id="form-deleteType">
+    <h3 class="admin-form-title">Удаление типа</h3>
+    <div class="admin-form-input-box">
+      <label for="typeId" class="admin-form-input-box-label">№ типа:</label>
+      <input type="number" name="id" id="typeId" class="admin-form-input-box-input" placeholder="Введите № типа..." min="0" max="10000" required>
+    </div>
+    <input type="submit" id="form-deleteType-btn" value="Удалить тип" class="admin-form-btn">
+  </form>
+
+
+  <!-- Работа с брендами -->
+ 
+  <table class="table" id="viewBrands">
+    <tr>
+      <th>№ бренда</th>
+      <th>Название бренда</th>
+    </tr>
+    <% if (brands && brands.length > 0) { %>
+      <% brands.forEach(({id, name}) => { %>
+        <tr>
+        <td><%= id %></td>
+        <td><%= name %></td>
+        </tr>
+        <% })} else { %>
+          <td>Брендов не найдено!</td>
+        <% } %>
+  </table>
+
+  <form action="/admin/addBrand" method="POST" class="admin-form" id="form-addBrand">
+    <h3 class="admin-form-title">Добавление бренда</h3>
+    <div class="admin-form-input-box">
+      <label for="brandName" class="admin-form-input-box-label">Название бренда:</label>
+      <input type="text" name="name" id="brandName" class="admin-form-input-box-input" placeholder="Введите навзание бренда..." required>
+    </div>
+    <input type="submit" id="form-addBrand-btn" value="Добавить бренд" class="admin-form-btn">
+  </form>
+
+  <form action="/admin/deleteBrand" method="POST" class="admin-form" id="form-deleteBrand">
+    <h3 class="admin-form-title">Удаление бренда</h3>
+    <div class="admin-form-input-box">
+      <label for="brandId" class="admin-form-input-box-label">№ бренда:</label>
+      <input type="number" name="id" id="brandId" class="admin-form-input-box-input" placeholder="Введите № бренда..." min="0" max="10000" required>
+    </div>
+    <input type="submit" id="form-deleteBrand-btn" value="Удалить бренд" class="admin-form-btn">
+  </form>
+
+  <!-- Работа с картинками -->
+
+  <table class="table" id="viewImgs">
+    <tr>
+      <th>№ картинки</th>
+      <th>Ссылка</th>
+      <th>№ товара</th>
+      <th>Изображение</th>
+    </tr>
+    <% if (imgs && imgs.length > 0) { %>
+      <% imgs.forEach(({id, imgLink, productId}) => { %>
+        <tr>
+        <td><%= id %></td>
+        <td><%= imgLink %></td>
+        <td><%= productId %></td>
+        <td width="250px" height="250px"><img src="<%= imgLink %>" alt="продукт" width="250px" height="250px"></td>
+        </tr>
+      <% })} else { %>
+        <td>Картинок не найдено!</td>
+      <% } %>
+  </table>
+
+  <form action="/admin/addImg" method="POST" enctype="multipart/form-data" class="admin-form" id="form-addImg">
+    <h3 class="admin-form-title">Добавление картинки</h3>
+    <div class="admin-form-input-box">
+      <label for="img" class="admin-form-input-box-label">Вставка файла: </label>
+      <input type="file" name="img" id="img" class="admin-form-input-box-input" required>
+    </div>
+    <div class="admin-form-input-box">
+        <label for="productId" class="admin-form-input-box-label">№ товара:</label>
+        <input type="number" name="productId" id="productId" class="admin-form-input-box-input" placeholder="Введите № товара..." min="0" max="10000" required>
+      </div>
+    <input type="submit" id="form-addImg-btn" value="Добавить картинку товара" class="admin-form-btn">
+  </form>
+
+  <form action="/admin/deleteImg" method="POST" class="admin-form" id="form-deleteImg">
+    <h3 class="admin-form-title">Удаление картинки товара</h3>
+    <div class="admin-form-input-box">
+      <label for="imgId" class="admin-form-input-box-label">№ размера:</label>
+      <input type="number" name="id" id="imgId" class="admin-form-input-box-input" placeholder="Введите № картинки..." min="0" max="10000" required>
+    </div>
+    <input type="submit" id="form-deleteImg-btn" value="Удалить картинку" class="admin-form-btn">
+  </form>
+
+  <!-- Работа с размерами -->
+
+  <table class="table" id="viewSizes">
+    <tr>
+      <th>№ размера</th>
+      <th>Значение размера</th>
+      <th>№ товара</th>
+    </tr>
+    <% if (sizes && sizes.length > 0) { %>
+      <% sizes.forEach(({id, sizeName, productId}) => { %>
+        <tr>
+        <td><%= id %></td>
+        <td><%= sizeName %></td>
+        <td><%= productId %></td>
+        </tr>
+      <% })} else { %>
+        <td>Размеров не найдено!</td>
+      <% } %>
+  </table>
+
+  <form action="/admin/addSize" method="POST" class="admin-form" id="form-addSize">
+    <h3 class="admin-form-title">Добавление размера</h3>
+    <div class="admin-form-input-box">
+      <label for="sizeName" class="admin-form-input-box-label">Название размера:</label>
+      <input type="text" name="sizeName" id="sizeName" class="admin-form-input-box-input" placeholder="Введите значение размера..." required>
+    </div>
+    <div class="admin-form-input-box">
+        <label for="productId" class="admin-form-input-box-label">№ товара:</label>
+        <input type="number" name="productId" id="productId" class="admin-form-input-box-input" placeholder="Введите № товара..." min="0" max="10000" required>
+      </div>
+    <input type="submit" id="form-addSize-btn" value="Добавить размер" class="admin-form-btn">
+  </form>
+
+  <form action="/admin/deleteSize" method="POST" class="admin-form" id="form-deleteSize">
+    <h3 class="admin-form-title">Удаление размера</h3>
+    <div class="admin-form-input-box">
+      <label for="sizeId" class="admin-form-input-box-label">№ размера:</label>
+      <input type="number" name="id" id="sizeId" class="admin-form-input-box-input" placeholder="Введите № размера..." min="0" max="10000" required>
+    </div>
+    <input type="submit" id="form-deleteSize-btn" value="Удалить размер" class="admin-form-btn">
+  </form>
+
+  <!-- Работа с заказами -->
+
+  <table class="table" id="viewOrders">
+    <tr>
+      <th>ID</th>
+      <th>UserId</th>
+      <th>Электронная почта</th>
+      <th>Телефон</th>
+      <th>Адрес</th>
+      <th>Доставка</th>
+      <th>Статус</th>
+    </tr>
+    <% if (orders && orders.length > 0) { %>
+      <% orders.forEach(({id, userId, order_info, status}) => { %>
+        <tr>
+        <td><%= id %></td>
+        <td><%= userId %></td>
+        <% if(order_info){ %>
+          <td><%= order_info.email %></td>
+          <td><%= order_info.phone %></td>
+          <td><%= order_info.adress %></td> 
+          <td><%= order_info.delivery %></td>
+        <%} else { %>
+          <td>Информации о заказе не найдено!</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        <% } %>
+        <td><%= status %></td>
+        </tr>
+      <% })} else { %>
+        <td>Заказов не найдено!</td>
+      <% } %>
+  </table>
+
+  <form action="/admin/deleteOrder" method="POST" class="admin-form" id="form-deleteOrder">
+    <h3 class="admin-form-title">Удаление заказа</h3>
+    <div class="admin-form-input-box">
+      <label for="orderId" class="admin-form-input-box-label">№ заказа:</label>
+      <input type="number" name="id" id="orderId" class="admin-form-input-box-input" placeholder="Введите № заказа..." min="0" max="10000" required>
+    </div>
+    <input type="submit" id="form-deleteOrder-btn" value="Удалить заказ" class="admin-form-btn">
+  </form>
+
+  <!-- Работа с отзывами -->
+
+  <table class="table" id="viewReviews">
+    <tr>
+      <th>№ отзыва</th>
+      <th>Текст</th>
+      <th>№ пользователя</th>
+    </tr>
+    <% if (reviews && reviews.length > 0) { %>
+      <% reviews.forEach(({id, text, userId}) => { %>
+        <tr>
+        <td><%= id %></td>
+        <td><%= text %></td>
+        <td><%= userId %></td>
+        </tr>
+        <% })} else { %>
+          <td>Отзывов не найдено!</td>
+        <% } %>
+  </table>
+
+  <form action="/admin/deleteReview" method="POST" class="admin-form" id="form-deleteReview">
+    <h3 class="admin-form-title">Удаление отзыва</h3>
+    <div class="admin-form-input-box">
+      <label for="reviewId" class="admin-form-input-box-label">№ отзыва:</label>
+      <input type="number" name="id" id="reviewId" class="admin-form-input-box-input" placeholder="Введите № отзыва..." min="0" max="10000" required>
+    </div>
+    <input type="submit" id="form-deleteReview-btn" value="Удалить отзыв" class="admin-form-btn">
+  </form>
+
+    <!-- Работа с пользователми -->
+
+    <table class="table" id="viewUsers">
+      <tr>
+        <th>№ пользователя</th>
+        <th>Email</th>
+        <th>Роль</th>
+      </tr>
+      <% if (users && users.length > 0) { %>
+        <% users.forEach(({id, email, role}) => { %>
+          <tr>
+          <td><%= id %></td>
+          <td><%= email %></td>
+          <td><%= role %></td>
+          </tr>
+      <% })} else { %>
+        <td>Пользователей не найдено!</td>
+      <% } %>
+    </table>
+  
+    <form action="/admin/updateUser" method="POST" class="admin-form" id="form-updateUser">
+      <h3 class="admin-form-title">Редактирование пользователя</h3>
+      <div class="admin-form-input-box">
+        <label for="userId" class="admin-form-input-box-label">№ пользователя:</label>
+        <input type="number" name="id" id="userId" class="admin-form-input-box-input" placeholder="Введите № пользователя..." min="0" max="10000" required>
+      </div>
+      <div class="admin-form-input-box">
+        <label for="userRole" class="admin-form-input-box-label">Роль пользователя:</label>
+        <input type="text" name="role" id="userRole" class="admin-form-input-box-input" placeholder="Введите роль.." required>
+      </div>
+      <input type="submit" id="form-updateUser-btn" value="Редактировать пользователя" class="admin-form-btn">
+    </form>
+
+    <form action="/admin/deleteUser" method="POST" class="admin-form" id="form-deleteUser">
+      <h3 class="admin-form-title">Удаление пользователя</h3>
+      <div class="admin-form-input-box">
+        <label for="userId" class="admin-form-input-box-label">№ пользователя:</label>
+        <input type="number" name="id" id="userId" class="admin-form-input-box-input" placeholder="Введите № пользователя..." min="0" max="10000" required>
+      </div>
+      <input type="submit" id="form-deleteUser-btn" value="Удалить пользователя" class="admin-form-btn">
+    </form>
+
+  <script>
+    // валидация цены товара
+    document.getElementById('form-addProduct-btn').addEventListener('submit', function(e){
+    const floatInput = document.getElementById('productPrice');
+    floatInput.addEventListener('input', () => {
+        const value = parseFloat(floatInput.value);
+        if (isNaN(value)) {
+            floatInput.value = "";
+        } else {
+            // floatInput.setCustomValidity('');
+            floatInput.value = value;
+        }
+    });
+})
+    // добавление товара
+    $("#form-addProduct").submit(function addProduct(e){
+  e.preventDefault();
+      $.ajax({
+      url: $("#form-addProduct").attr('action'),
+      method: "POST",
+      dataType: "json",
+      data: $("#form-addProduct").serialize(),  // Сеарилизуем объект
+      success: function(res){
+        
+        var result = JSON.stringify(res);
+        result = JSON.parse(result);
+        alert(result.message);
+        
+      },
+      error: function(res) { // Данные не отправлены
+        alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+      }
+    })
+    })
+    // редактирование товара
+    $("#form-updateProduct").submit(function updateProduct(e){
+  e.preventDefault();
+      $.ajax({
+      url: $("#form-updateProduct").attr('action'),
+      method: "POST",
+      dataType: "json",
+      data: $("#form-updateProduct").serialize(),  // Сеарилизуем объект
+      success: function(res){
+        
+        var result = JSON.stringify(res);
+        result = JSON.parse(result);
+        alert(result.message);
+        
+      },
+      error: function(res) { // Данные не отправлены
+        alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+      }
+    })
+    })
+    // удаление товара
+    $("#form-deleteProduct").submit(function deleteProduct(e){
+  e.preventDefault();
+      $.ajax({
+      url: $("#form-deleteProduct").attr('action'),
+      method: "POST",
+      dataType: "json",
+      data: $("#form-deleteProduct").serialize(),  // Сеарилизуем объект
+      success: function(res){
+        
+        var result = JSON.stringify(res);
+        result = JSON.parse(result);
+        alert(result.message);
+        
+      },
+      error: function(res) { // Данные не отправлены
+        alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+      }
+    })
+    })
+</script>
+
+<script>
+    // добавление типа
+    $("#form-addType").submit(function addType(e){
+  e.preventDefault();
+      $.ajax({
+      url: $("#form-addType").attr('action'),
+      method: "POST",
+      dataType: "json",
+      data: $("#form-addType").serialize(),  // Сеарилизуем объект
+      success: function(res){
+        
+        var result = JSON.stringify(res);
+        result = JSON.parse(result);
+        alert(result.message);
+        
+      },
+      error: function(res) { // Данные не отправлены
+        alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+      }
+    })
+    })
+// удаление типа
+$("#form-deleteType").submit(function deleteType(e){
+  e.preventDefault();
+      $.ajax({
+      url: $("#form-deleteType").attr('action'),
+      method: "POST",
+      dataType: "json",
+      data: $("#form-deleteType").serialize(),  // Сеарилизуем объект
+      success: function(res){
+        
+        var result = JSON.stringify(res);
+        result = JSON.parse(result);
+        alert(result.message);
+        
+      },
+      error: function(res) { // Данные не отправлены
+        alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+      }
+    })
+    })
+</script>
+
+<script>
+    // добавление бренда
+    $("#form-addBrand").submit(function addBrand(e){
+  e.preventDefault();
+      $.ajax({
+      url: $("#form-addBrand").attr('action'),
+      method: "POST",
+      dataType: "json",
+      data: $("#form-addBrand").serialize(),  // Сеарилизуем объект
+      success: function(res){
+        
+        var result = JSON.stringify(res);
+        result = JSON.parse(result);
+        alert(result.message);
+        
+      },
+      error: function(res) { // Данные не отправлены
+        alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+      }
+    })
+    })
+// удаление бренда
+$("#form-deleteBrand").submit(function deleteBrand(e){
+  e.preventDefault();
+      $.ajax({
+      url: $("#form-deleteBrand").attr('action'),
+      method: "POST",
+      dataType: "json",
+      data: $("#form-deleteBrand").serialize(),  // Сеарилизуем объект
+      success: function(res){
+        
+        var result = JSON.stringify(res);
+        result = JSON.parse(result);
+        alert(result.message);
+        
+      },
+      error: function(res) { // Данные не отправлены
+        alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+      }
+    })
+    })
+</script>
+
+<script>
+    // добавление картинки товара
+  $("#form-addImg-btn").submit(function addImg(e){
+  e.preventDefault();
+  $.ajax({
+  url: $("#form-addImg").attr('action'),
+  method: "POST",
+  enctype: "multipart/form-data",
+  dataType: "json",
+  data: $("#form-addImg").serialize(),  // Сеарилизуем объект
+  success: function(res){
+    var result = JSON.stringify(res);
+    result = JSON.parse(result);
+    alert(result.message);
+  },
+  error: function(res) { // Данные не отправлены
+    alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+  }
+})
+})
+// удаление картинки товара
+$("#form-deleteImg").submit(function deleteImg(e){
+  e.preventDefault();
+  $.ajax({
+  url: $("#form-deleteImg").attr('action'),
+  method: "POST",
+  dataType: "json",
+  data: $("#form-deleteImg").serialize(),  // Сеарилизуем объект
+  success: function(res){
+    
+    var result = JSON.stringify(res);
+    result = JSON.parse(result);
+    alert(result.message);
+    
+  },
+  error: function(res) { // Данные не отправлены
+    alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+  }
+})
+})
+</script>
+
+<script>
+    // добавление размера товара
+  $("#form-addSize").submit(function addSize(e){
+  e.preventDefault();
+  $.ajax({
+  url: $("#form-addSize").attr('action'),
+  method: "POST",
+  dataType: "json",
+  data: $("#form-addSize").serialize(),  // Сеарилизуем объект
+  success: function(res){
+    
+    var result = JSON.stringify(res);
+    result = JSON.parse(result);
+    alert(result.message);
+    
+  },
+  error: function(res) { // Данные не отправлены
+    alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+  }
+})
+})
+
+// удаление размера товара
+$("#form-deleteSize").submit(function deleteSize(e){
+  e.preventDefault();
+  $.ajax({
+  url: $("#form-deleteSize").attr('action'),
+  method: "POST",
+  dataType: "json",
+  data: $("#form-deleteSize").serialize(),  // Сеарилизуем объект
+  success: function(res){
+    
+    var result = JSON.stringify(res);
+    result = JSON.parse(result);
+    alert(result.message);
+  },
+  error: function(res) { // Данные не отправлены
+    alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+  }
+})
+})
+</script>
+
+<script>
+    // Удаление заказа
+  $("#form-deleteOrder").submit(function deleteOrder(e){
+  e.preventDefault();
+  $.ajax({
+  url: $("#form-deleteOrder").attr('action'),
+  method: "POST",
+  dataType: "json",
+  data: $("#form-deleteOrder").serialize(),  // Сеарилизуем объект
+  success: function(res){
+    let result = JSON.stringify(res);
+    result = JSON.parse(result);
+    alert(result.message);
+  },
+  error: function(res) { // Данные не отправлены
+    alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+  }
+})
+})
+</script>
+
+<script>
+    // Удаление отзыва
+    $("#form-deleteReview").submit(function deleteReview(e){
+      e.preventDefault();
+      $.ajax({
+      url: $("#form-deleteReview").attr('action'),
+      method: "POST",
+      dataType: "json",
+      data: $("#form-deleteReview").serialize(),  // Сеарилизуем объект
+      success: function(res){
+        
+        var result = JSON.stringify(res);
+        result = JSON.parse(result);
+        alert(result.message);
+      },
+      error: function(res) { // Данные не отправлены
+        alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+      }
+    })
+    })
+    </script>
+
+<script>
+  // Редактирование пользователя
+  $("#form-updateUser").submit(function updateUser(e){
+  e.preventDefault();
+    $.ajax({
+    url: $("#form-updateUser").attr('action'),
+    method: "POST",
+    dataType: "json",
+    data: $("#form-updateUser").serialize(),  // Сеарилизуем объект
+    success: function(res){
+      
+      var result = JSON.stringify(res);
+      result = JSON.parse(result);
+      alert(result.message);
+      
+    },
+    error: function(res) { // Данные не отправлены
+      alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+    }
+  })
+  })
+  // Удаление пользователя
+  $("#form-deleteUser").submit(function deleteUser(e){
+  e.preventDefault();
+    $.ajax({
+    url: $("#form-deleteUser").attr('action'),
+    method: "POST",
+    dataType: "json",
+    data: $("#form-deleteUser").serialize(),  // Сеарилизуем объект
+    success: function(res){
+      
+      var result = JSON.stringify(res);
+      result = JSON.parse(result);
+      alert(result.message);
+      
+    },
+    error: function(res) { // Данные не отправлены
+      alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+    }
+  })
+  })
+
+  </script>

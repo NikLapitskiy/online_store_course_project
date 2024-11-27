@@ -1,0 +1,68 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/navbar.ejs') %>
+<div class="basket-wrapper" id="basket-wrapper">
+      <div class="basket-conteiner">
+        <% if(orders && orders.length > 0){ %>
+            <form action="/manager" id="setStatusForm">
+                <div class="setStatusForm">
+                    <label for="setStatusOrder">ID заказа: <input type="number" name="id" min="1" id="setStatusOrder" required></label>
+                    <div class="setStatusBox">
+                        <label><input type="radio" name="status" value="Доставляется">&nbsp;Доставляется</label>
+                        <label><input type="radio" name="status" value="Выполнен">&nbsp;Выполнен</label>
+                    </div>
+                    <input type="submit" value="Обновить статус" id="setStatusBtn">
+                </div>
+                <table class="table" id="ordersTable">
+                    <tr>
+                        <th>ID</th>
+                        <th>ФИО</th>
+                        <th>Электронная почта</th>
+                        <th>Телефон</th>
+                        <th>Адрес</th>
+                        <th>Доставка</th>
+                        <th>Статус</th>
+                    </tr>
+                    <% orders.forEach(({id, status, order_info}) => { %>
+                        <tr>
+                            <td><%= id %></td>
+                            <td><%= order_info.fullName %></td>
+                            <td><%= order_info.email %></td>
+                            <td><%= order_info.phone %></td>
+                            <td><%= order_info.adress %></td>
+                            <td><%= order_info.delivery %></td>
+                            <td><%= status %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </form>
+        <% } else { %>
+        <p>Список заказов пуст</p>
+        <% } %>
+      </div>
+    </div>
+<%- include('./partials/footer.ejs') %>
+<script>
+    $("#setStatusForm").submit(function setStatus(e){
+        if(!document.cookie){
+            alert("Вы не авторизованы и не имеете доступа к корзине!");
+        }
+        else {
+            e.preventDefault();
+            $.ajax({
+                url:     $("#setStatusForm").attr("action"),
+                method:     "POST",
+                dataType: "json",
+                data: $("#setStatusForm").serialize(),
+                success: function(res) { 
+                let result = JSON.stringify(res);
+                result = JSON.parse(result);
+                alert(result.message);
+                window.location.href = "/manager"
+            },
+            error: function(response) { // Данные не отправлены
+            alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+            }
+       });
+        }
+    })
+</script>

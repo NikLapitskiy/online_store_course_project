@@ -1,0 +1,116 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/navbar.ejs') %>
+        <div class="page">
+            <div class="targetProduct-wrapper">
+                <% if (product) { %>
+                <div class="targetProduct-conteiner">
+                    <div class="targetProduct-slider">
+                        <% if(product.img && product.img.length > 0) { %>
+                        <% product.img.forEach(({imgLink}) => { %>
+                            <div class="targetProduct-slider-item">
+                                <img src="<%= imgLink %>" alt="Product" class="targetProduct-img">
+                            </div>
+                        <% })} else { %>
+                            <p>Картинок данного товара не найдено</p>
+                        <% } %>
+                        <a class="targetProduct-slider-previous" onclick="previousSlide()">&#10094;</a>
+                        <a class="targetProduct-slider-next" onclick="nextSlide()">&#10095;</a>
+                    </div>
+                </div>
+                <div class="targetProduct-conteiner">
+                    <% if(product.product_info){ %>
+                    <p class="targetProduct-title"><%= product.product_info.title %></p>
+                    <p class="targetProduct-price">Цена: &nbsp <%= product.price.toFixed(2) %> Br &nbsp <%= parseInt(product.price/2.9 * 100) / 100 %> $</p>
+                    <form action="/product/<%= product.id %>" method="POST" id="toBasket">
+                        <p class="targetProduct-size"> Размер:&nbsp
+                            <select name="targetSize" class="targetProduct-select-size" required>
+                                <% if(sizes && sizes.length > 0) { %>
+                                <% for(let i = 0; i < sizes.length; i++){ %>
+                                    <option value="<%= sizes[i].sizeName %>"><%= sizes[i].sizeName %></option>
+                                <% }} %>
+                            </select>
+                        </p>
+                        <p class="targetProduct-description"><%= product.product_info.description %></p>
+                        <input type="submit" class="targetProduct-to-basket-button" id="toBasketBtn" value="Добавить в корзину"></input>
+                    </form>
+                    <form action="/product/<%= product.id %>/setRating" method="POST" id="setRatingform">
+                        <div class="targetProduct-description">
+                            <img src="/resource/rating.png" alt="rating" class="basket-product-rating-icon">
+                            <input type="number" name="rate" id="rate" min="1" value="10" max="10" placeholder="10" required>
+                            <input type="submit" value="Оценить">
+                        </div>
+                    </form>
+                    <% } else { %>
+                        <p class="targetProduct-description">Информация о данном товаре не найдена!</p>
+                    <% } %>
+                </div>
+                <% } else { %>
+                    <p>Товар не найден</p>
+                <% } %>
+            </div>
+        </div>
+<%- include('./partials/footer.ejs') %>
+<script src="/scripts/slider.js"></script>
+<script>
+    pageLocation = window.location.href;
+
+    document.querySelector(".targetProduct-to-basket-button").addEventListener("submit", function(event) {
+        if(!document.cookie){
+            alert("Вы не авторизованы и не имеете доступа к корзине!");
+            window.location.href ="javascript:void";
+        }
+        else {
+            alert("Модель добавлена в вашу корзину!");
+            window.location.href = pageLocation;
+        }
+        event.preventDefault();
+    })
+</script>
+<script>
+    $("#toBasket").submit(function toBasket(e){
+        if(!document.cookie){
+            alert("Вы не авторизованы и не имеете доступа к корзине!");
+        }
+        else {
+            e.preventDefault();
+            $.ajax({
+                url:     $("#toBasket").attr("action"),
+                method:     "POST",
+                dataType: "json",
+                data: $("#toBasket").serialize(),
+                success: function(res) { 
+                let result = JSON.stringify(res);
+                result = JSON.parse(result);
+                alert(result.message);
+            },
+            error: function(response) { // Данные не отправлены
+            alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+            }
+       });
+        }
+    })
+
+    $("#setRatingform").submit(function setRating(e){
+        if(!document.cookie){
+            alert("Вы не авторизованы и не имеете доступа!");
+        }
+        else {
+            e.preventDefault();
+            $.ajax({
+                url:     $("#setRatingform").attr("action"),
+                method:     "POST",
+                dataType: "json",
+                data: $("#setRatingform").serialize(),
+                success: function(res) { 
+                let result = JSON.stringify(res);
+                result = JSON.parse(result);
+                alert(result.message);
+            },
+            error: function(response) { // Данные не отправлены
+            alert('Ошибка. Данные не отправлены. Попробуйте еще раз!');
+            }
+       });
+        }
+    })
+
+  </script>

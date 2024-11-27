@@ -1,0 +1,139 @@
+.setStatusForm{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin-bottom: 25px;
+}
+.setStatusBox{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.conteiner{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.admin-conteiner{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.table{
+    margin-top: 25px;
+    display: none;
+    width: 100%;
+    border: 1px solid $dark;
+    border-collapse: collapse;
+}
+
+.table tr{
+    width: 100%;
+    border: 1px solid $dark;
+}
+
+.table th{
+    border: 1px solid $dark;
+    text-align: center;
+}
+
+.table tr > td {
+    border: 1px solid $dark;
+    text-align: justify;
+}
+
+.admin-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.admin-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    background-color: $accent;
+    border: 1px solid $trueGreen;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+.admin-form{
+    display: none;
+    border: 1px solid $dark;
+    border-radius: 15px;
+    margin-top: 25px;
+    padding: 25px;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    &-title{
+        width: 100%;
+        text-align: center;
+    }
+    &-input-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: flex-start;
+        width: 100%;
+        margin: 10px 0 10px 0; 
+        &-label{
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: $dark;
+        }
+        &-input{
+            background: inherit;
+            outline: none;
+            border:none;
+            font-size: 16px;
+            font-weight: 400;
+            color: $dark;
+            border-bottom: 1px solid $dark;
+        }
+        &-span{
+            font-size: 16px;
+            font-weight: 500;
+            margin: 5px 0 5px 0;
+            color: $dark;
+        }
+    }
+    &-input-box > textarea{
+        background: inherit;
+        border: 1px solid $dark;
+        text-align: justify;
+    }
+    &-btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 50px;
+        background: $light;
+        border: 2px solid $trueGreen;
+        border-radius: 25px;
+        box-shadow: 0 0 5px 2px $trueGreen;
+        font-size: 18px;
+        font-weight: 600;
+        transition: 0.3s ease;
+        margin-top: 10px;
+    }
+    &-btn:hover{
+        background-color: $trueGreen;
+        border: 2px solid $trueGreen;
+        border-radius: 25px;
+        box-shadow: 0 0 10px 5px $trueGreen;
+        color: #fff;
+    }
+}
+
+#ordersTable{
+    display: table;
+}

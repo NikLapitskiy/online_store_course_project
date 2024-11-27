@@ -1,0 +1,70 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/navbar.ejs') %>
+        <div class="page-dark notice">
+            <div class="wrapper">
+                <h1 class="notice-title">Бесплатная доставка</h1>
+                <p class="notice-description">Сделайте заказ и получите подарок</p>
+            </div>
+        </div>
+        <div class="page-light">
+            <div class="wrapper">
+                <div class="collection">
+                    <div class="collection-item collection-sneakers">
+                        <div class="collection-inf">
+                            <h2 class="collection-title">Кроссовки</h2>
+                            <p class="collection-description">Adidas, Nike, Puma, New Balance и их коллаборации</p>
+                            <a href="/product?typeId=1" class="btn"><img src="/resource/arrow.png" alt="" class="arrow"></a>
+                        </div>
+                        <img src="/resource/sneakers.png" alt="" class="collection-img">
+                    </div>
+                    <div class="collection-item collection-clothes">
+                        <div class="collection-inf">
+                            <h2 class="collection-title">Одежда и Аксессуары</h2>
+                            <p class="collection-description">Худи, свитшоты, джогеры, футболки, шорты, головные уборы, аксессуары от самых известных брендов</p>
+                            <a href="/product?typeId=9&typeId=8&typeId=5&typeId=6&typeId=3&typeId=4&typeId=2&typeId=7" class="btn"><img src="/resource/arrow.png" alt="" class="arrow"></a>
+                        </div>
+                        <img src="/resource/clothes.png" alt="" class="collection-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="wrapper">
+                <h2 class="title-h2">Лучшие модели</h2>
+                <div class="product">
+                    <% if (products && products.length > 0) { %>
+                        <% for(let i = 0; i < 4; i++){ %>
+                            <% if(products[i]){ %>
+                            <div class="product-item">
+                                <div class="product-slider">
+                                    <a href="/product/<%= products[i].id %>" class="product-link">
+                                        <% if(products[i].img && products[i].img.length > 0) { %>
+                                        <% products[i].img.forEach(({imgLink}) => {%>
+                                            <div class="product-slider-item">
+                                                <img src="<%= imgLink %>" alt="Product" class="product-img">
+                                            </div>
+                                        <% })} else { %>
+                                            <p>Картинок данного товара не найдено!</p>
+                                        <% } %>
+                                    </a>
+                                    <a class="product-slider-previous" onclick="previousSlide()">&#10094;</a>
+                                    <a class="product-slider-next" onclick="nextSlide()">&#10095;</a>
+                                </div>
+                                <div class="product-boxPriceRating">
+                                    <p class="product-price"><%= products[i].price %> Br</p>
+                                    <p class="product-rating"><img src="/resource/rating.png" alt="rating" class="product-rating-icon"> &nbsp<%= products[i].rating %>/10</p>
+                                </div>
+                                    <% if(products[i].product_info){%>
+                                    <p class="product-title"><%= products[i].product_info.title %></p>
+                                    <% } %>
+                            </div>
+                            <% } %>
+                        <% } %>
+                    <% } else { %>
+                        <p class="product-title">По вашему запросу ничего найдено</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+<%- include('./partials/footer.ejs') %>
+<script src="/scripts/slider.js"></script>

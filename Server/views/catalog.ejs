@@ -1,0 +1,178 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/navbar.ejs') %>
+        <div class="page">
+            <div class="catalog-wrapper">
+                <div class="filter-wrapper">
+                    <form method="GET" autocomplete="on">
+                        <div class="filter-box">
+                            <h3 class="filter-title">Фильтры</h3>
+                        </div>
+                        <div class="filter-box">
+                            <h4 class="filter-title">Типы</h4>
+                            <% if (types && types.length > 0) { %>
+                                <% types.forEach(({id, name}) => { %>
+                                    <label class="filter-checkbox-btn">
+                                        <input type="checkbox" name="typeId" value="<%= id %>">
+                                        <span><%= name %></span>
+                                    </label>
+                                <% }) %>
+                            <% } else { %>
+                                <p>Список типов пуст</p>
+                            <% } %>
+                        </div>
+                        <div class="filter-box">
+                            <h4 class="filter-title">Бренды</h4>
+                            <% if ( brands && brands.length > 0) { %>
+                                <% brands.forEach(({id, name }) => { %>
+                                    <label class="filter-checkbox-btn">
+                                        <input type="checkbox" name="brandId" value="<%= id %>">
+                                        <span><%= name %></span>
+                                    </label>
+                                <% }) %>
+                            <% } else { %>
+                                <p>Список брендов пуст</p>
+                            <% } %>
+                        </div>
+                        <div class="filter-box">
+                            <h4 class="filter-title">Цена</h4>
+                            <span>
+                                <input type="number" id="minPrice" name="minPrice" class="filter-price" placeholder="от" min="0" max="1000"/>
+                                <input type="number" id="maxPrice" name="maxPrice" class="filter-price" placeholder="до" min="0" max="1000"/>
+                            </span>
+                        </div>
+                        <div class="filter-box" id="filter-btns">
+                            <input type="submit" class="filter-btn" value="Показать">
+                            <input type="reset" class="filter-btn" value="Сбросить" id="filter-reset">
+                        </div>
+                    </form>
+                </div>
+                <div class="catalog-conteiner">
+                    <div class="sorting-wrapper">
+                        <p class="sorting-item">Сначала:</p>
+                        <label class="sorting-radio-btn">
+                            <input type="radio" name="sorting" onclick="clickRadio(this)" id="priceUp">
+                            <span>Дешевые</span>
+                        </label>
+                        <label class="sorting-radio-btn">
+                            <input type="radio" name="sorting" onclick="clickRadio(this)" id="priceDown">
+                            <span>Дорогие</span>
+                        </label>
+                        <label class="sorting-radio-btn">
+                            <input type="radio" name="sorting" onclick="clickRadio(this)" id="ratingDown">
+                            <span>Лучшие по рейтингу</span>
+                        </label>
+                        <label class="sorting-radio-btn">
+                            <input type="radio" name="sorting" onclick="clickRadio(this)" id="ratingUp">
+                            <span>Худшие по рейтингу</span>
+                        </label>
+                    </div> 
+                    <div class="product-wrapper" id="product-wrapper">
+                        <% if ( models && models.length > 0) { %>
+                            <% models.forEach(({ id, name, price, rating, img, product_info}) => { %>
+                                <div class="product-item">
+                                    <div class="product-slider">
+                                        <a href="/product/<%= id %>" class="product-link">
+                                            <% if(img && img.length > 0){ %>
+                                            <% img.forEach(({imgLink}) => { %>
+                                                <div class="product-slider-item">
+                                                    <img src="<%= imgLink %>" alt="Product" class="product-img">
+                                                </div>
+                                            <% })} else { %>
+                                                <p>Картинок данного товара не найдено </p>
+                                            <% } %>
+                                        </a>
+                                        <a class="product-slider-previous" onclick="previousSlide()">&#10094;</a>
+                                        <a class="product-slider-next" onclick="nextSlide()">&#10095;</a>
+                                    </div>
+                                        <div class="product-boxPriceRating">
+                                            <p class="product-price"><%= price %> Br</p>
+                                            <p class="product-rating"><img src="/resource/rating.png" alt="rating" class="product-rating-icon"> &nbsp<%= rating %>/10</p>
+                                        </div>
+                                        <% if( product_info) { %>
+                                            <p class="product-title"><%= product_info.title %></p>
+                                        <% } else { %>
+                                            Информации данного товара не найдено
+                                        <% } %>
+                                </div>
+                                <% }) %>
+                        <% } else { %>
+                            <p class="product-title">По вашему запросу ничего найдено</p>
+                        <% } %>
+                    </div> 
+                </div>  
+            </div>
+        </div>    
+<%- include('./partials/footer.ejs') %>
+<script src="/scripts/slider.js"></script>
+<script>
+    function clickRadio(el) {
+        var siblings = document.querySelectorAll("input[type='radio'][name='" + el.name + "']");
+        for (var i = 0; i < siblings.length; i++) {
+            if (siblings[i] != el)
+            siblings[i].oldChecked = false;
+        }
+        if (el.oldChecked)
+            el.checked = false;
+        el.oldChecked = el.checked;
+    }
+    // Сброс фильтров и сортировки
+    document.querySelector('#filter-reset').addEventListener('click', () => {
+        var queryString = window.location;
+        window.location.href = "/product";
+    });
+</script>
+<script>
+    // Сортировка товаров по цене
+document.querySelector('#priceUp').addEventListener("click", () => {
+  const elements = document.querySelectorAll('.product-item');
+  const sorted = [...elements].sort((a, b) => {
+    const priceElA = a.querySelector(".product-price");
+    const priceElB = b.querySelector(".product-price");
+    const getPrice = (el) => parseFloat(el.innerHTML.replace(/ /g, ""));
+    return getPrice(priceElA) - getPrice(priceElB);
+  });
+  const resultEl = document.querySelector(".product-wrapper");
+  resultEl.innerHTML = null;
+  sorted.forEach(el => resultEl.appendChild(el));
+});
+document.querySelector('#priceDown').addEventListener("click", () => {
+  const elements = document.querySelectorAll('.product-item');
+  const sorted = [...elements].sort((a, b) => {
+    const priceElA = a.querySelector(".product-price");
+    const priceElB = b.querySelector(".product-price");
+    const getPrice = (el) => parseFloat(el.innerHTML.replace(/ /g, ""));
+    return getPrice(priceElB) - getPrice(priceElA);
+  });
+  const resultEl = document.querySelector(".product-wrapper");
+  resultEl.innerHTML = null;
+  sorted.forEach(el => resultEl.appendChild(el));
+});
+// Сортировка по рейтингу
+function getRating(el){
+    let rating = el.textContent.split('/');
+    rating = rating[0];
+    return rating;
+}
+document.querySelector('#ratingUp').addEventListener("click", () => {
+  const elements = document.querySelectorAll('.product-item');
+  const sorted = [...elements].sort((a, b) => {
+    const ratingElA = a.querySelector(".product-rating");
+    const ratingElB = b.querySelector(".product-rating");
+    return getRating(ratingElA) - getRating(ratingElB);
+  });
+  const resultEl = document.querySelector(".product-wrapper");
+  resultEl.innerHTML = null;
+  sorted.forEach(el => resultEl.appendChild(el));
+});
+document.querySelector('#ratingDown').addEventListener("click", () => {
+  const elements = document.querySelectorAll('.product-item');
+  const sorted = [...elements].sort((a, b) => {
+    const ratingElA = a.querySelector(".product-rating");
+    const ratingElB = b.querySelector(".product-rating");
+    return getRating(ratingElB) - getRating(ratingElA);
+  });
+  const resultEl = document.querySelector(".product-wrapper");
+  resultEl.innerHTML = null;
+  sorted.forEach(el => resultEl.appendChild(el));
+});
+</script>

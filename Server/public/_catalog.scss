@@ -1,0 +1,231 @@
+.catalog{
+    &-wrapper{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+    }
+    &-conteiner{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.product{
+    display:flex;
+    justify-content: flex-start;
+    list-style-type: none;
+    flex-wrap: wrap;
+    &-wrapper{
+        display: flex;
+        max-width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin:0 auto;
+        padding: 35px 0 35px 0px;
+        margin-left: 35px;
+    }
+    &-item{
+        border: 1px dashed $dark-gray;
+        border-radius: 15px;
+        margin: 15px;
+        padding: 20px;
+        height: 350px;
+        width: 250px;
+        position: relative;
+    }
+    &-link{
+        text-decoration: none;
+    }
+    &-img{
+        display:block;
+        width: 250px;
+        height: 250px;
+        border-radius: 10px;
+    }
+    &-title{
+        color: $dark;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: justify;
+    }
+    &-boxPriceRating{
+        display: flex;
+        justify-content: space-between;
+    }
+    &-price{
+        color: $accent;
+        font-size:18px;
+        font-weight: 700;
+    }
+    &-rating{
+        color: $dark-gray;
+        font-size:16px;
+        font-weight: 500;
+        &-icon{
+            width: 16px;
+            height: 16px;
+        }
+    }
+    &-slider{
+        max-width: 100%;
+        position: relative;
+        margin: auto;
+        height: 250px;
+        &-item img{
+            object-fit: cover;
+            width: 250px;
+            height: 250px;
+        }
+        &-previous, &-next{
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: $dark;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+        }
+        &-next{
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        &-previous:hover, &-next:hover{
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        &-item{
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @keyframes fade {
+            /* Устанавливаем и изменяем степень прозрачности: */
+            from {
+                opacity: 0.4
+            }
+            to {
+                opacity: 1
+            }
+        }
+    }
+}
+
+.targetProduct{
+    &-wrapper{
+        display: flex;
+        width: 1110px;
+        margin:0 auto;
+    }
+    &-conteiner{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 555px;
+        height: 555px;
+        margin: 50px 25px 50px 0;
+    }
+    &-title{
+        color: $dark;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    &-name{
+        color: $dark;
+        font-size:16px;
+        font-weight: 700; 
+    }
+    &-img{
+        width: 555px;
+        height: 555px;
+        border-radius: 25px;
+    }
+    &-description{
+        color: $dark;
+        font-size:16px;
+        font-weight: 500; 
+        text-align: justify;
+        margin-bottom: 15px;
+    }
+    &-price, &-size{
+        color: $dark;
+        font-size:20px;
+        font-weight: 600;   
+    }
+    &-select-size{
+        width: 200px;
+        border: 1px #ddd solid;
+        background: #f8f8f8;
+        color: #000;
+        box-sizing: border-box;
+        cursor: pointer;
+        padding: 2px 30px 2px 10px;
+        border-radius: 5px;
+    }
+    &-to-basket-button{
+        height: 50px;
+        width: 200px;
+        border: 3px solid $dark;
+        border-radius: 25px;
+        background: $light-gray;
+        transition: 0.5s ;
+        margin-bottom: 20px;
+    }
+    &-to-basket-button:hover{
+        background: $light;
+        box-shadow: 0px 0px 2px 2px $trueGreen;
+        border: 3px solid $trueGreen;
+    }
+    &-slider{
+        max-width: 100%;
+        position: relative;
+        margin: auto;
+        width: 555px;
+        height: 555px;
+        &-item img{
+            object-fit: cover;
+            width: 555px;
+            height: 555px;
+            border-radius: 25px;
+        }
+        &-previous, &-next{
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: $dark;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+        }
+        &-next{
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        &-previous:hover, &-next:hover{
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        &-item{
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @keyframes fade {
+            /* Устанавливаем и изменяем степень прозрачности: */
+            from {
+                opacity: 0.4
+            }
+            to {
+                opacity: 1
+            }
+        }
+    }
+}
+
+@import '_filter_sort';

@@ -1,0 +1,36 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/navbar.ejs') %>
+<div class="page">
+            <div class="authorization">
+                <div class="authorization-wrapper">
+                    <div class="authorization-form-box register">
+                        <h2 class="authorization-title">Регистрация</h2>
+                        <form method="post" action="/user/registration">
+                            <div class="authorization-input-box">
+                                <span class="authorization-input-box-icon"><ion-icon name="person"></ion-icon></span>
+                                <input type="text" name="userName" class="authorization-input-box-input" required>
+                                <label for="userName" class="authorization-input-box-title">Имя пользователя</label>
+                            </div>
+                            <div class="authorization-input-box">
+                                <span class="authorization-input-box-icon"><ion-icon name="mail"></ion-icon></span>
+                                <input type="email" name="email" class="authorization-input-box-input" required>
+                                <label for="email" class="authorization-input-box-title">Email</label>
+                            </div>
+                            <div class="authorization-input-box">
+                                <span class="authorization-input-box-icon"><ion-icon name="lock-closed"></ion-icon></span>
+                                <input type="password" name="password" class="authorization-input-box-input" required>
+                                <label for="password" class="authorization-input-box-title">Пароль</label>
+                            </div>
+                            <div class="authorization-remember-forgot">
+                                <label for=""><input type="checkbox"> Запомнить меня</label>
+                            </div>
+                            <button type="submit" class="authorization-btn">Регистрация</button>
+                            <div class="authorization-login-register">
+                                <p>Зарегистрированы?<a href="/user/login" class="login-link">Вход</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+<%- include('./partials/footer.ejs') %>

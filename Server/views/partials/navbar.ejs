@@ -1,0 +1,71 @@
+<body>
+    <div class="bodyWrapper">
+        <div class="content">
+            <div class="page-light" id="fixed-header">
+                <div class="wrapper">
+                    <header class="header">
+                        <a href="/"><img src="/resource/logo1.png" alt="error" class="logo-img"></a>
+                        <nav>
+                            <ul class="nav">
+                                <li class="nav-item"><a href="/product" class="nav-link">Каталог</a></li>
+                                <li class="nav-item"><a href="/info" class="nav-link">Информация</a></li>
+                                <!-- <li class="nav-item"><a href="/delivery" class="nav-link">Доставка и  оплата</a></li> -->
+                                <li class="nav-item"><a href="/contacts" class="nav-link">Контакты</a></li>
+                                <li class="nav-item" id="exit"><a href="/" class="nav-link">Выйти</a></li>
+                                <li class="nav-item" id="auth"><a href="/user/login" class="nav-link">Авторизация</a></li> 
+                            </ul>
+                        </nav>
+                        <a href="/basket" id="basket-link"><img src="/resource/basket.png" alt="basket" class="nav-img"></a>
+                    </header>
+                </div>
+                <a href="/manager" class="panel-link" id="panel-manager"><div class="panel">Панель Менеджера</div></a>
+                <a href="/admin" class="panel-link" id="panel-admin"><div class="panel">Админ панель</div></a>
+            </div>
+            <script>
+                // выход из аккаунта
+                document.getElementById("exit").addEventListener("click", function(event) {
+                    var cookies = document.cookie.split(/;/);
+                    for (var i = 0, len = cookies.length; i < len; i++) {
+	                    var cookie = cookies[i].split(/=/);
+	                    document.cookie = cookie[0] + "=;max-age=-1";
+                    }
+                    window.location.href = "/";
+                    event.preventDefault();
+                })
+
+                document.getElementById('exit').style.display = "none";
+                if(document.cookie){
+                    document.getElementById("auth").style.display = "none";
+                    document.getElementById("exit").style.display = "block";
+                }
+                else{
+                    document.getElementById("auth").style.display = "block";
+                    document.getElementById("exit").style.display = "none";
+                }
+
+                // проверка на авторизованность
+                document.querySelector("#basket-link").addEventListener("click", function(event) {
+                    event.preventDefault();
+                    if(!document.cookie || document.cookie.length == 0){
+                        alert("Вы не авторизованы и не имеете доступа к корзине!");
+                        window.location.href ="javascript:void";
+                    }
+                    else {
+                        window.location.href = "/basket";
+                    }
+                })
+            </script>
+            <script>
+                let rolestr = document.cookie.split(';')[1];
+                var role = "";
+                if(rolestr){
+                    role = rolestr.split('=')[1];
+                }
+                console.log(role);
+                if(role == "MANAGER"){
+                    document.querySelector('#panel-manager').style.display = "block";
+                }
+                if(role == "ADMIN"){
+                    document.querySelector('#panel-admin').style.display = "block";
+                }
+            </script>
